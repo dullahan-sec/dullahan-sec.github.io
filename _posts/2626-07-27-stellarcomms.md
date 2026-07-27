@@ -178,7 +178,7 @@ SMB         10.1.249.148    445    DC-STELLAR       eng.payload                 
 SMB         10.1.249.148    445    DC-STELLAR       [*] Enumerated 7 local users: STELLARCOMMS
 ```
 
-Sadly, nothing so easy as credentials for the Administrator user in the account description. Not unheard of in real engagements, so I am told. Before moving on, we can generate our hosts file: ` nxc smb "10.1.249.148" -u "junior.analyst" -p 'Galaxy123!' --generate-hosts-file hosts.txt`.
+Sadly, nothing so easy as credentials for the Administrator user in the account description. Not unheard of in real engagements, so I am told. Before moving on, we can generate our hosts file: `nxc smb "10.1.249.148" -u "junior.analyst" -p 'Galaxy123!' --generate-hosts-file hosts.txt`
 
 # IIS (80)
 
