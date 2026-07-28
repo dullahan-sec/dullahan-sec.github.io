@@ -279,7 +279,7 @@ FLAG[redacted]
 
 Given the file on the FTP server mentioning Firefox as the browser of choice, once I logged in, I immediately went to check if I could easily steal Firefox passwords.
 
-I had never actually done it before. On looking it up, there was a project on GitHub which seemed to do exactly what I wanted: https://github.com/lclevy/firepwd. All I needed was the key4.db and logins.json files from the Firefox profile in AppData.
+I had never actually done it before. On looking it up, there was a project on GitHub which seemed to do exactly what I wanted: [firepwd](https://github.com/lclevy/firepwd). All I needed was the key4.db and logins.json files from the Firefox profile in AppData.
 
 As I had hoped, there was a populated profile in `C:\Users\ops.controller\AppData\Roaming\Mozilla\Firefox\Profiles\v8mn7ijj.default-esr`. Using EvilWinRM, I downloaded the two needed files.
 
@@ -390,7 +390,7 @@ _eng.payload has ReadGMSAPssword over a machine account._
 
 ## Reading GMSA Password
 
-Reading this article on Hacker Recipes: https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword, we can use bloodyAD to abuse this right and read the GMSA password of satlink-service$.
+Reading [this article on Hacker Recipes](https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword), we can use bloodyAD to abuse this right and read the GMSA password of satlink-service$.
 
 ```
 exegol-stellarcomms StellarComms # bloodyAD --host 10.1.249.148 -d stellarcomms.local -u eng.payload -p password get object 'satlink-service$' --attr msDS-ManagedPassword
@@ -474,4 +474,4 @@ HMMMMMMMHo                 `MMMMMMMMMT       .
 
 # Conclusion
 
-This was my first medium Active Directory machine. I thought it was fairly smooth sailing, probably thanks to my assumption about Firefox passwords which might've stumped me a while ago. Thank you to https://www.linkedin.com/in/marc-w-5346a3267/ for creating this lab, it was a very fun one. Thank you also for reading. 
+This was my first medium Active Directory machine. I thought it was fairly smooth sailing, probably thanks to my assumption about Firefox passwords which might've stumped me a while ago. Thank you to [2ubZ3r0](https://www.linkedin.com/in/marc-w-5346a3267/) for creating this lab, it was a very fun one. Thank you also for reading. 
