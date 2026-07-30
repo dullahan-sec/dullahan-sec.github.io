@@ -54,11 +54,11 @@ PORT   STATE SERVICE REASON         VERSION
 |_http-title: Sysadmins - System Administration Services
 ```
 
-Naturally, my eyes were immediately drawn to FTP, given it was anonymous and had a juicy looking text file.
+Naturally, my eyes were immediately drawn to FTP, given it allowed anonymous access and had a juicy looking text file.
 
 # FTP (21)
 
-Logging in with `ftp 10.1.83.38`, and the user of anonymous, I downloaded the file mentioned in the NMAP scan. Here's the contents:
+Logging in with `ftp 10.1.83.38` with the username of anonymous, I downloaded the file mentioned in the NMAP scan. Here's the contents:
 
 ```
 Hi team,
@@ -84,7 +84,7 @@ Nice. Going on to pastebin, it was indeed a list of passwords. I was thinking I 
 
 # SSH (22)
 
-Always good to check if it does password access in case you find valid credentials. You can check this with `ssh root@10.1.83.38`.
+Always good to check if it allows password access in case you find valid credentials. You can check this with `ssh root@10.1.83.38`.
 
 ```
 The authenticity of host '10.1.83.38 (10.1.83.38)' can't be established.
@@ -161,6 +161,14 @@ PORT      STATE  SERVICE
 Finally, we find SNMP to be open. Never heard of it. Looking at the page on [Hacktricks](https://hacktricks.wiki/en/network-services-pentesting/pentesting-snmp/index.html), we need to find the version of SNMP the server is using. I do this with `nmap -sU "10.1.83.38" -p 161 -A`
 
 ```
+PORT    STATE SERVICE VERSION
+161/udp open  snmp    net-snmp; net-snmp SNMPv3 server
+| snmp-info:
+|   enterprise: net-snmp
+|   engineIDFormat: unknown
+|   engineIDData: 13f3f36692d0546a00000000
+|   snmpEngineBoots: 11
+|_  snmpEngineTime: 2m08s
 ```
 
 v3? That seems to make things a bit harder according to Hacktricks: 'SNMPv3: Uses a better authentication form and the information travels encrypted using (dictionary attack could be performed but would be much harder to find the correct creds than in SNMPv1 and v2).'
@@ -191,11 +199,11 @@ Testing SNMPv3 with authentication and without encryption
 POC ---> snmpwalk -u waserby -A butterfly 10.1.83.38 -v3 -l authnopriv
 [✔] Password Attack (No Crypto)... (Complete)
 ```
-Nice! running the command it recommends, `snmpwalk -u waserby -A butterfly 10.1.83.38 -v3 -l authnopriv`, we get loads of data. Better to send its output to a text file.
+Nice! running the command it recommends, `snmpwalk -u waserby -A butterfly 10.1.83.38 -v3 -l authnopriv`, we get loads of data. Better to send its output to a text file by appending `> snmp.txt`.
 
-The command takes a while to complete, but eventually we can view its output.
+The command takes a while to complete, but eventually we can view its output with `less snmp.txt`.
 
-After scrolling for a while, I found this `STRING: "-c sshpass -p 'PerfectIsTheEnemyOfDone223!' ssh helena@sysadmins; sleep 60"`
+After scrolling for a while, I found this: `STRING: "-c sshpass -p 'PerfectIsTheEnemyOfDone223!' ssh helena@sysadmins; sleep 60"`
 
 Excellent. 
 
@@ -220,7 +228,7 @@ I recall seeing this version on another box at some point. Looking it up we see 
 
 Seeing that vulnerability, I went looking for a POC. I decided to choose [this one](https://github.com/K1tt3h/CVE-2025-32463-POC/tree/main).
 
-Since it is a short shell script and we are on ssh which provides a stable shell, we can open up a text editor and copy it in directly. When we run the POC, we get root! I somewhat doubt this was the intended path, but a wins a win.
+Since it is a short shell script and we are on SSH which provides a stable shell, we can open up a text editor and copy it in directly. When we run the POC, we get root! Nice to have an easy priv esc for once. As Tyler said, "definitely something people would see on an exam (or real world) and overlook by following rabbit holes" which I 100% agree with. I have probably spend countless hours on priv esc rabbit holes when it turns out to be something simple like this.
 
 ```
 root@sysadmins:/# whoami
@@ -229,7 +237,7 @@ root
 
 # Conclusion
 
-I thought this was a great box. It's my first medium linux machine on Hack Smarter, and it taught me a lot about SNMP which I had only heard about.
+I thought this was a great box. It's my first medium linux machine on Hack Smarter, and it taught me a lot about SNMP which I had only heard about. I will be sure to check UDP ports on machines now, especially when I am stuck. Big thanks to [0liverFlow](https://www.linkedin.com/in/konateolivier/) for this machine.
 
 
 
