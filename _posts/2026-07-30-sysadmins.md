@@ -124,7 +124,7 @@ Using the list of credentials, I tried to brute force SSH with `hydra -L users.t
 
 Thanks to a hint from Tyler Ramsbey, I next decided to scan for UDP ports. I admit I don't usually do this, and I wouldn't have gotten any further without a hint.
 
-` nmap -sU "10.1.83.38" -T5`
+`nmap -sU "10.1.83.38" -T5`
 
 ```
 Starting Nmap 7.93 ( https://nmap.org ) at 2026-07-30 17:19 BST
