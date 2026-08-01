@@ -3,7 +3,7 @@ title: Sysadmins | Hack Smarter
 date: 2026-07-27 16:00:00 +0100
 categories: [Box, Hack Smarter]
 tags: [linux, hack smarter]
-description: My write-up of the StellarComms Active Directory machine from Hack Smarter.
+description: My write-up of the SysAdmins linux machine from Hack Smarter.
 image: assets/Sysadmins/title.png
 ---
 
