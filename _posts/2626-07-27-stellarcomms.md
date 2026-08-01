@@ -1,6 +1,6 @@
 ---
 title: StellarComms | Hack Smarter
-date: 2026-07-27 16:00:00 +0100
+date: 2026-07-30 16:00:00 +0100
 categories: [Box, Hack Smarter]
 tags: [active directory, hack smarter]
 description: My write-up of the StellarComms Active Directory machine from Hack Smarter.
