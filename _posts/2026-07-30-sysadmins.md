@@ -175,7 +175,7 @@ v3? That seems to make things a bit harder according to Hacktricks: 'SNMPv3: Use
 
 Given we have credentials, I wanted to see if there was a method of brute-forcing a login for SNMP as when I run `snmpwalk -v 3 -c public 10.1.83.38` I get `snmpwalk: No securityName specified`. Indeed there was, [snmpwn](https://github.com/hatlord/snmpwn). It is intended for v3 too.
 
-To use it, I did `./snmpwn.rb --hosts hosts.txt -u users.txt -p SysAdmins\ Passwords\ Leak.txt --enclist ../SysAdmins\ Passwords\ Leak.txt` where hosts.txt just contains the server's IP.
+To use it, I did `./snmpwn.rb --hosts hosts.txt -u users.txt -p SysAdmins\ Passwords\ Leak.txt --enclist SysAdmins\ Passwords\ Leak.txt` where hosts.txt just contains the server's IP.
 
 ```
 Checking that the hosts are live!
